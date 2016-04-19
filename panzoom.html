@@ -1,0 +1,100 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+
+<script>
+  window.Yarnball = window.Yarnball || {};
+  
+  window.Yarnball.PanzoomBehavior = {
+    created: function() {
+      this.panzoomTranslate = {x: 0, y: 0};
+      this.panzoomScale     = 1.0;
+      this.panzoomOrigin    = {x: 0, y: 0};
+    },
+    ready: function() {
+      this.style['transform-origin'] = '0 0';
+    },
+    panzoom: function(options) {
+      this.panzoomTranslate = options.translate || this.panzoomTranslate;
+      this.panzoomScale     = options.scale     || this.panzoomScale;
+      this.style.transform = 'scale(' + this.panzoomScale + ') translate(' + this.panzoomTranslate.x + 'px, ' + this.panzoomTranslate.y + 'px)';
+    },
+    panOffset: function(offset) {
+      this.panzoom({
+        translate: {
+          x: this.panzoomTranslate.x + offset.x,
+          y: this.panzoomTranslate.y + offset.y,
+        }
+      });
+    },
+    zoomOffset: function(offset) {
+      this.panzoom({
+        scale: this.panzoomScale * (1.0 + offset),
+      });
+    },
+    panzoomTowardPosition: function(position, zoomOffset) {
+      var descaledPosition = {
+        x: position.x / this.panzoomScale,
+        y: position.y / this.panzoomScale,
+      }
+      this.panzoom({
+        translate: {
+          x: this.panzoomTranslate.x - (descaledPosition.x - (descaledPosition.x / (1.0 + zoomOffset))),
+          y: this.panzoomTranslate.y - (descaledPosition.y - (descaledPosition.y / (1.0 + zoomOffset))),
+        },
+        scale: this.panzoomScale * (1.0 + zoomOffset),
+      });
+    },
+    panzoomShowRegion: function(rect, minimumZoom) {
+      if (!('width' in rect)) {
+        rect.width = rect.right - rect.left;
+      }
+      if (!('height' in rect)) {
+        rect.height = rect.bottom - rect.top;
+      }
+    
+      var rectCenter = {
+        x: rect.left + (rect.width  / 2),
+        y: rect.top  + (rect.height / 2),
+      }
+      var scaleToFit = null;
+      if ((rect.width / rect.height) > (this.offsetWidth / this.offsetHeight)) {
+        scaleToFit = this.offsetWidth / rect.width;
+      } else {
+        scaleToFit = this.offsetHeight / rect.height;
+      }
+      this.panzoom({
+        translate: {
+          x: -(rectCenter.x - (this.offsetWidth  / 2)),
+          y: -(rectCenter.y - (this.offsetHeight / 2)),
+        },
+        scale: (minimumZoom !== undefined) ? Math.min(minimumZoom, scaleToFit) : scaleToFit,
+      });
+    },
+    panzoomTransformPoint: function(point) {
+      return {
+        x: (point.x + this.panzoomTranslate.x) * this.panzoomScale,
+        y: (point.y + this.panzoomTranslate.y) * this.panzoomScale,
+      }
+    },
+    panzoomUntransformPoint: function(point) {
+      return {
+        x: (point.x / this.panzoomScale) - this.panzoomTranslate.x,
+        y: (point.y / this.panzoomScale) - this.panzoomTranslate.y,
+      }
+    },
+  }
+</script>
+
+<dom-module id="yb-panzoom">
+  <template>
+    <content></content>
+  </template>
+  
+  <script>
+    (function() {
+      Polymer({
+        is: 'yb-panzoom',
+        behaviors: [window.Yarnball.PanzoomBehavior],
+      });
+    })();
+  </script>
+</dom-module>
