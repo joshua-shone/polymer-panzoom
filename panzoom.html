@@ -4,43 +4,40 @@
   window.Yarnball = window.Yarnball || {};
   
   window.Yarnball.PanzoomBehavior = {
-    created: function() {
-      this.panzoomTranslate = {x: 0, y: 0};
-      this.panzoomScale     = 1.0;
-      this.panzoomOrigin    = {x: 0, y: 0};
-    },
+    _panzoomTranslate: {x: 0, y: 0},
+    _panzoomScale: 1.0,
     ready: function() {
       this.style['transform-origin'] = '0 0';
     },
     panzoom: function(options) {
-      this.panzoomTranslate = options.translate || this.panzoomTranslate;
-      this.panzoomScale     = options.scale     || this.panzoomScale;
-      this.style.transform = 'scale(' + this.panzoomScale + ') translate(' + this.panzoomTranslate.x + 'px, ' + this.panzoomTranslate.y + 'px)';
+      this._panzoomTranslate = options.translate || this._panzoomTranslate;
+      this._panzoomScale     = options.scale     || this._panzoomScale;
+      this.style.transform = 'scale(' + this._panzoomScale + ') translate(' + this._panzoomTranslate.x + 'px, ' + this._panzoomTranslate.y + 'px)';
     },
     panOffset: function(offset) {
       this.panzoom({
         translate: {
-          x: this.panzoomTranslate.x + offset.x,
-          y: this.panzoomTranslate.y + offset.y,
+          x: this._panzoomTranslate.x + offset.x,
+          y: this._panzoomTranslate.y + offset.y,
         }
       });
     },
     zoomOffset: function(offset) {
       this.panzoom({
-        scale: this.panzoomScale * (1.0 + offset),
+        scale: this._panzoomScale * (1.0 + offset),
       });
     },
     panzoomTowardPosition: function(position, zoomOffset) {
       var descaledPosition = {
-        x: position.x / this.panzoomScale,
-        y: position.y / this.panzoomScale,
+        x: position.x / this._panzoomScale,
+        y: position.y / this._panzoomScale,
       }
       this.panzoom({
         translate: {
-          x: this.panzoomTranslate.x - (descaledPosition.x - (descaledPosition.x / (1.0 + zoomOffset))),
-          y: this.panzoomTranslate.y - (descaledPosition.y - (descaledPosition.y / (1.0 + zoomOffset))),
+          x: this._panzoomTranslate.x - (descaledPosition.x - (descaledPosition.x / (1.0 + zoomOffset))),
+          y: this._panzoomTranslate.y - (descaledPosition.y - (descaledPosition.y / (1.0 + zoomOffset))),
         },
-        scale: this.panzoomScale * (1.0 + zoomOffset),
+        scale: this._panzoomScale * (1.0 + zoomOffset),
       });
     },
     panzoomShowRegion: function(rect, minimumZoom) {
@@ -71,14 +68,14 @@
     },
     panzoomTransformPoint: function(point) {
       return {
-        x: (point.x + this.panzoomTranslate.x) * this.panzoomScale,
-        y: (point.y + this.panzoomTranslate.y) * this.panzoomScale,
+        x: (point.x + this._panzoomTranslate.x) * this._panzoomScale,
+        y: (point.y + this._panzoomTranslate.y) * this._panzoomScale,
       }
     },
     panzoomUntransformPoint: function(point) {
       return {
-        x: (point.x / this.panzoomScale) - this.panzoomTranslate.x,
-        y: (point.y / this.panzoomScale) - this.panzoomTranslate.y,
+        x: (point.x / this._panzoomScale) - this._panzoomTranslate.x,
+        y: (point.y / this._panzoomScale) - this._panzoomTranslate.y,
       }
     },
   }

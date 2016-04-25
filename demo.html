@@ -65,8 +65,8 @@
           var lastCursorPosition = {x: event.pageX, y: event.pageY};
           function mousemove(event) {
             panzoomElement.panOffset({
-              x: (event.pageX - lastCursorPosition.x) / panzoomElement.panzoomScale,
-              y: (event.pageY - lastCursorPosition.y) / panzoomElement.panzoomScale,
+              x: (event.pageX - lastCursorPosition.x) / panzoomElement._panzoomScale,
+              y: (event.pageY - lastCursorPosition.y) / panzoomElement._panzoomScale,
             });
             lastCursorPosition = {x: event.pageX, y: event.pageY};
           }
