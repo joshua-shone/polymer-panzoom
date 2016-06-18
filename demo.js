@@ -7,7 +7,7 @@ var app = express();
 var server = http.Server(app);
 
 app.use(express.static('.'));
-app.use(express.static('../../'));
+app.use(express.static('./bower_components/'));
 
 app.use(function(req, res, next) {
   if (req.path === '/') {
