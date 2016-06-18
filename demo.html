@@ -55,6 +55,8 @@
     <div id="instructions">
       <span><strong>Pan:</strong> click and drag</span>
       <span><strong>Zoom:</strong> mouse wheel</span>
+      <span><strong>Cursor (container):</strong> <span id="cursor-container"></span></span>
+      <span><strong>Cursor (content):  </strong> <span id="cursor-content"></span></span>
     </div>
     
     <yb-panzoom id="panzoom">
@@ -124,6 +126,18 @@
             (event.which === 107) ? 0.08 : -0.08
           );
         }
+      });
+      
+      // Cursor coordinate display
+      panzoomElement.addEventListener('mousemove', function(event) {
+        var pointContainer = {
+          x: event.clientX - panzoomElement.offsetLeft,
+          y: event.clientY - panzoomElement.offsetTop,
+        }
+        var pointContent = panzoomElement.panzoomConvertPoint(pointContainer, 'CONTAINER', 'CONTENT');
+        
+        document.getElementById('cursor-container').textContent = pointContainer.x + ' - ' + pointContainer.y;
+        document.getElementById('cursor-content').textContent   = pointContent.x   + ' - ' + pointContent.y;
       });
       
     });
