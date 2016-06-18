@@ -28,9 +28,16 @@
       });
     },
     panzoomTowardPosition: function(position, zoomOffset) {
+      if (!(position.transformed || position.untransformed)) {
+        throw 'Cannot panzoom toward position, not given either transformed or untransformed position.';
+      }
+      if (!position.transformed) {
+        position.transformed = this.panzoomTransformPoint(position.untransformed);
+      }
+      
       var descaledPosition = {
-        x: position.x / this._panzoomScale,
-        y: position.y / this._panzoomScale,
+        x: position.transformed.x / this._panzoomScale,
+        y: position.transformed.y / this._panzoomScale,
       }
       this.panzoom({
         translate: {
