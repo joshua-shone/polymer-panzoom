@@ -1,9 +1,7 @@
 <link rel="import" href="/polymer/polymer.html">
 
 <script>
-  window.Yarnball = window.Yarnball || {};
-  
-  window.Yarnball.PanzoomBehavior = {
+  window.PolymerPanzoomBehavior = {
     _panzoomTranslate: {x: 0, y: 0},
     _panzoomScale: 1.0,
     ready: function() {
@@ -101,7 +99,7 @@
   }
 </script>
 
-<dom-module id="yb-panzoom">
+<dom-module id="polymer-panzoom">
   <template>
     <content></content>
   </template>
@@ -109,8 +107,8 @@
   <script>
     (function() {
       Polymer({
-        is: 'yb-panzoom',
-        behaviors: [window.Yarnball.PanzoomBehavior],
+        is: 'polymer-panzoom',
+        behaviors: [window.PolymerPanzoomBehavior],
       });
     })();
   </script>

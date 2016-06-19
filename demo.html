@@ -30,7 +30,7 @@
         margin: 8px;
       }
       
-      yb-panzoom {
+      #panzoom {
         display: block;
         position: fixed;
         left:   50%;
@@ -42,7 +42,7 @@
         background-color: #ddd;
         cursor: move;
       }
-      yb-panzoom img {
+      #panzoom img {
         display: block;
         width:  300px;
         height: 300px;
@@ -59,9 +59,9 @@
       <span><strong>Cursor (content):  </strong> <span id="cursor-content"></span></span>
     </div>
     
-    <yb-panzoom id="panzoom">
+    <polymer-panzoom id="panzoom">
       <img src="demo-image.svg">
-    </yb-panzoom>
+    </polymer-panzoom>
   </body>
   
   <script>
