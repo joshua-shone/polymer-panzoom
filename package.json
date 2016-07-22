@@ -4,6 +4,7 @@
   "description": "Panning/zooming component",
   "main": "panzoom.html",
   "scripts": {
+    "install": "bower install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -13,6 +14,7 @@
   "author": "Joshua Shone",
   "license": "MIT",
   "dependencies": {
+    "bower": "^1.7.9",
     "express": "^4.13.4",
     "yargs": "^4.6.0"
   }
