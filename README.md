@@ -8,13 +8,13 @@ npm install
 npm start
 ```
 
+Then navigate a browser to [http://localhost:8080/](http://localhost:8080/)
+
 To serve the demo on a different port:
 
 ```bash
 npm start -- --port=8081
 ```
-
-Then navigate a browser to [http://localhost:8080/](http://localhost:8080/)
 
 ## Setting up Dependencies
 
