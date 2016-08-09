@@ -5,7 +5,13 @@ Panning/zooming web component utilizing CSS3 transforms, built with [Polymer](ht
 
 ```bash
 npm install
-node demo.js --port 8080
+npm start
+```
+
+To serve the demo on a different port:
+
+```bash
+npm start -- --port=8081
 ```
 
 Then navigate a browser to [http://localhost:8080/](http://localhost:8080/)
