@@ -1,7 +1,7 @@
 # polymer-panzoom
 Panning/zooming web component utilizing CSS3 transforms, built with [Polymer](https://www.polymer-project.org)
 
-## To run the demo
+## Run the Demo
 
 ```bash
 npm install
@@ -16,7 +16,9 @@ To serve the demo on a different port:
 npm start -- --port=8081
 ```
 
-## Setting up Dependencies
+## Usage
+
+### Setting up Dependencies
 
 Serve Polymer at root, i.e. `/polymer`.
 
@@ -28,7 +30,7 @@ The [web-components polyfill](https://github.com/webcomponents/webcomponentsjs) 
 
 If using `polymer-panzoom` as a [bower](https://bower.io/) component, the contents of the bower components directory could be served at root, such that `/polymer` `/webcomponentsjs` are accesible.
 
-## Usage
+### Using the Component
 
 Import `polymer-panzoom` with a `<link>` tag:
 
