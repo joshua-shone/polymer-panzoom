@@ -10,15 +10,19 @@ node demo.js --port 8080
 
 Then navigate a browser to [http://localhost:8080/](http://localhost:8080/)
 
-## Usage
+## Setting up Dependencies
 
-To use `polymer-panzoom` as a [bower](https://bower.io/) component, ensure that the contents of the bower components directory is being served at the root directory, such that `/polymer/` is accessible.
+Serve Polymer at root, i.e. `/polymer`.
 
 The [web-components polyfill](https://github.com/webcomponents/webcomponentsjs) is required by Polymer, so ensure that it's included, for example with a `<script>` tag:
 
 ```html
 <script src="webcomponentsjs/webcomponents-lite.min.js"></script>
 ```
+
+If using `polymer-panzoom` as a [bower](https://bower.io/) component, the contents of the bower components directory could be served at root, such that `/polymer` `/webcomponentsjs` are accesible.
+
+## Usage
 
 Import `polymer-panzoom` with a `<link>` tag:
 
