@@ -53,3 +53,39 @@ var myPanzoom = document.getElementById('my-panzoom');
 myPanzoom.panOffset({x: 100, y: 150});
 myPanzoom.zoomOffset(0.1);
 ```
+
+### Methods
+
+#### .panzoom(options)
+
+Apply panning/zooming parameters.
+
+> *options* - An object containing:
+> - translate {x, y}
+> - scale (multiplier)
+
+#### .panzoomTowardPosition(position, zoomOffset)
+
+Pan and zoom toward or away from the given position based on a zoom offset factor.
+
+> - *position* {x, y}
+> - *zoomOffset* multiplier
+
+#### .panzoomShowRegion(rect, minimumZoom)
+
+Pan and zoom to fit the given rectangle into view.
+
+> - *rect* {left, top, right, bottom}
+> - *minimumZoom* (optional)
+
+#### .panzoomConvertPoint(point, sourceCoords, destCoords)
+
+Translates an X-Y pixel position to/from container and content coordinates.
+Container coordinates are local to the DOM element on which this panzoom behavior is applied.
+Content coordinates are local to the child elements within the panzoom DOM element.
+
+> - *point* An object with x and y fields, e.g. {x:100, y:20.5}
+> - *sourceCoords* Source coordinates, either "CONTAINER" or "CONTENT".
+> - *destCoords* Destination coordinates, either "CONTAINER" or "CONTENT".
+
+Returns: The converted point, as an object with x and y fields, e.g. {x:40.89, y:42}

@@ -2,11 +2,13 @@
 
 <script>
   window.PolymerPanzoomBehavior = {
-    _panzoomTranslate: {x: 0, y: 0},
-    _panzoomScale: 1.0,
-    ready: function() {
-      this.style['transform-origin'] = '0 0';
-    },
+
+    /**
+     * Apply panning/zooming parameters.
+     * @param options An object containing:
+     *                - translate {x, y}
+     *                - scale (multiplier)
+     */
     panzoom: function(options) {
       this._panzoomTranslate = options.translate || this._panzoomTranslate;
       this._panzoomScale     = options.scale     || this._panzoomScale;
@@ -25,6 +27,12 @@
         scale: this._panzoomScale * (1.0 + offset),
       });
     },
+    
+    /**
+     * Pan and zoom toward or away from the given position based on a zoom offset factor.
+     * @param position {x, y}
+     * @param zoomOffset multiplier
+     */
     panzoomTowardPosition: function(position, zoomOffset) {
       if (!(position.transformed || position.untransformed)) {
         throw 'Cannot panzoom toward position, not given either transformed or untransformed position.';
@@ -45,6 +53,12 @@
         scale: this._panzoomScale * (1.0 + zoomOffset),
       });
     },
+    
+    /**
+     * Pan and zoom to fit the given rectangle into view.
+     * @param rect {left, top, right, bottom}
+     * @param minimumZoom (optional)
+     */
     panzoomShowRegion: function(rect, minimumZoom) {
       if (!('width' in rect)) {
         rect.width = rect.right - rect.left;
@@ -95,6 +109,12 @@
           y: (point.y + this._panzoomTranslate.y) * this._panzoomScale,
         }
       }
+    },
+    
+    _panzoomTranslate: {x: 0, y: 0},
+    _panzoomScale: 1.0,
+    ready: function() {
+      this.style['transform-origin'] = '0 0';
     },
   }
 </script>
