@@ -69,44 +69,6 @@
     
       var panzoomElement = document.getElementById('panzoom');
       
-      // Mouse-wheel zooming
-      panzoomElement.addEventListener('wheel', function(event) {
-        var zoomSpeed = 0.08;
-        var zoomOffset = (event.deltaY < 0) ? zoomSpeed : -zoomSpeed;
-        panzoomElement.panzoomTowardPosition(
-          {
-            transformed: {
-              x: event.pageX - panzoomElement.offsetLeft,
-              y: event.pageY - panzoomElement.offsetTop,
-            },
-          },
-          zoomOffset
-        );
-      });
-      
-      // Mouse-drag panning
-      panzoomElement.addEventListener('mousedown', function(event) {
-        if (event.button === 0) {
-          event.preventDefault();
-          var lastCursorPosition = {x: event.pageX, y: event.pageY};
-          function mousemove(event) {
-            panzoomElement.panOffset({
-              x: (event.pageX - lastCursorPosition.x) / panzoomElement._panzoomScale,
-              y: (event.pageY - lastCursorPosition.y) / panzoomElement._panzoomScale,
-            });
-            lastCursorPosition = {x: event.pageX, y: event.pageY};
-          }
-          function mouseup(event) {
-            window.removeEventListener('mousemove', mousemove);
-            window.removeEventListener('mouseup',   mouseup);
-          }
-          
-          window.addEventListener('mousemove', mousemove);
-          window.addEventListener('mouseup',   mouseup);
-          return false;
-        }
-      });
-      
       // Keyboard controls
       document.addEventListener('keydown', function(event) {
         if (event.which === 39) {
