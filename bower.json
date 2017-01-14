@@ -13,6 +13,6 @@
   "license": "MIT",
   "homepage": "",
   "dependencies": {
-    "polymer": "~1.4.0"
+    "polymer": "~1.7.1"
   }
 }
