@@ -1,6 +1,10 @@
 # polymer-panzoom
 Panning/zooming web component utilizing CSS3 transforms, built with [Polymer](https://www.polymer-project.org)
 
+## View Live Example
+
+See a live example [here](https://joshua-shone.github.io/polymer-panzoom). Drag the image or use arrow keys to pan and use the mouse scroll wheel to zoom.
+
 ## Run the Demo
 
 ```bash
@@ -9,12 +13,6 @@ npm start
 ```
 
 Then navigate a browser to [http://localhost:8080/](http://localhost:8080/)
-
-To serve the demo on a different port:
-
-```bash
-npm start -- --port=8081
-```
 
 ## Usage
 
